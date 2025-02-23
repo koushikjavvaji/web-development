@@ -1,0 +1,39 @@
+<html>
+<h1>TO-DO List(Advanced)</h1>
+<input type="text"></input>
+<button onclick="add()">ADD</button>
+<div id="todos"></div>
+<script>
+    let todo = [];
+    function add() {
+        todo.push(document.querySelector("input").value)
+        render()
+    }
+    function deleteTodo(index) {
+        todo.splice(index, 1);
+        render();
+    }
+    function createTodoComponent(input, index) {
+        const div = document.createElement("div");
+        const h1 = document.createElement("h1");
+        const button = document.createElement("button");
+
+        h1.innerHTML = input;
+        button.innerHTML = "Delete";
+        button.setAttribute("onclick", `deleteTodo(${index})`);
+
+        div.append(h1);
+        div.append(button);
+        return div;
+    }
+
+    function render() {
+        document.querySelector("#todos").innerHTML = "";
+        for (let i = 0; i < todo.length; i++) {
+            const element = createTodoComponent(todo[i], i);
+            document.querySelector("#todos").appendChild(element);
+        }
+    }
+</script>
+
+</html>
